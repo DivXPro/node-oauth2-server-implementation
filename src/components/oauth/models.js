@@ -1,7 +1,7 @@
 'use strict';
 
-let _ = require('lodash');
-let config = require('config');
+import * as _ from 'lodash';
+import * as config from 'config';
 let sqldb = require('./sqldb');
 let User = sqldb.User;
 let OAuthClient = sqldb.OAuthClient;

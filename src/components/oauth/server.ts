@@ -1,12 +1,8 @@
-'use strict';
+import { Request, Response } from 'oauth2-server';
+import config from 'config';
+const db = config.get('db') === 'mongo' ? require('./mongodb') : require('./sqldb');
 
-let oauthServer = require('oauth2-server');
-let config = require('config');
-let Request = oauthServer.Request;
-let Response = oauthServer.Response;
-let db = config.get('db') === 'mongo' ? require('./mongodb') : require('./sqldb');
-
-let oauth = require('./oauth');
+import { oauth } from './oauth';
 
 function removeStuff (token) {
   if (token.client) {
@@ -18,7 +14,7 @@ function removeStuff (token) {
   return token;
 }
 
-module.exports = function (app) {
+export function server (app: any) {
   app.all('/oauth/token', function (req, res, next) {
     let request = new Request(req);
     let response = new Response(res);

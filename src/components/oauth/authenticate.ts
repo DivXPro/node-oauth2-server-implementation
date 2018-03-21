@@ -1,17 +1,8 @@
-'use strict';
-
-let oauthServer = require('oauth2-server');
-// let config = require('config');
-// let db = require('./sqldb');
-// if (config.get('db') === 'mongo') {
-//   db = require('./mongodb');
-// }
-let Request = oauthServer.Request;
-let Response = oauthServer.Response;
+import { Request, Response } from 'oauth2-server';
 
 let oauth = require('./oauth');
 
-module.exports = function (options) {
+export function authenticate(options) {
   options = options || {};
   return function (req, res, next) {
     let request = new Request({
